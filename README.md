@@ -7,7 +7,7 @@ Social Networking web application made on top of MERN stack which allows user to
 
 
 ChatWow Signup page
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_signup.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_signup.png?raw=true)
 
 
 
@@ -16,7 +16,7 @@ ChatWow Signup page
 
 
 ChatWow Home page-1
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_home1.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_home1.png?raw=true)
 
 
 
@@ -25,7 +25,7 @@ ChatWow Home page-1
 
 
 ChatWow Home page-2
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_home2.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_home2.png?raw=true)
 
 
 
@@ -36,7 +36,7 @@ ChatWow Home page-2
 
 
 ChatWow Profile page
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_profile.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_profile.png?raw=true)
 
 
 
@@ -45,7 +45,7 @@ ChatWow Profile page
 
 
 ChatWow create post page-1
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_createpost.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_createpost.png?raw=true)
 
 
 
@@ -57,5 +57,5 @@ ChatWow create post page-1
 
 
 ChatWow create post page-2
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_create_post2.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_create_post2.png?raw=true)
 
