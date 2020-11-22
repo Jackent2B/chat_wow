@@ -2,7 +2,7 @@
 Social Networking web application made on top of MERN stack which allows user to login, signup, create new posts,Delete posts, Follow and unfollow users, like and comment on other posts, update profile pic and much more like a real social media app
 
  ChatWow Login page
-![](https://github.com/Jackent2B/chat_wow/blob/master/chatwow_login.png?raw=true)
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_login.png?raw=true)
 
 
 
