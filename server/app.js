@@ -28,7 +28,7 @@ app.use(postRoute);
 app.use(userRoute);
 
 if (process.env.NODE_ENV == 'production') {
-  app.use(express.static('success-client/build'));
+  app.use(express.static('client/build'));
   const path = require('path');
   app.get('*', (req, res) => {
     res.sendFile(
