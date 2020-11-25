@@ -1,6 +1,4 @@
 # chatwow
-Social Networking web application made on top of MERN stack which allows user to login, signup, create new posts,Delete posts, Follow and unfollow users, like and comment on other posts, update profile pic and much more like a real social media app
-
 Hey,Thank you for having interest in this repository !
 
 To use this application,
@@ -10,6 +8,8 @@ put mongoDB info into dev.js file
 Type " npm install " inside the server directory ( Download Server Dependencies )
 Type " npm install " inside the client directory ( Download Front-end Dependencies )
 
+
+Social Networking web application made on top of MERN stack which allows user to login, signup, create new posts,Delete posts, Follow and unfollow users, like and comment on other posts, update profile pic and much more like a real social media app.
 
  ChatWow Login page
 ![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_login.png?raw=true)
