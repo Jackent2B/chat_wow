@@ -27,6 +27,15 @@ app.use(authRoute);
 app.use(postRoute);
 app.use(userRoute);
 
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static('client/build'));
   const path = require('path');
