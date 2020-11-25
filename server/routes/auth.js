@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const { JWT_TOKEN } = require('../keys');
+const { JWT_TOKEN } = require('../config/keys');
 const crypto = require('crypto');
 const verifyToken = require('../middleware/verifyToken');
-const { SENDGRID_API_KEY } = require('../keys');
+const { SENDGRID_API_KEY } = require('../config/keys');
 
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(SENDGRID_API_KEY);
