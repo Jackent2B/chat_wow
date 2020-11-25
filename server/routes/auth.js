@@ -7,14 +7,6 @@ const jwt = require('jsonwebtoken');
 const { JWT_TOKEN } = require('../config/keys');
 const crypto = require('crypto');
 const verifyToken = require('../middleware/verifyToken');
-const { SENDGRID_API_KEY } = require('../config/keys');
-
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(SENDGRID_API_KEY);
-
-router.get('/protected', verifyToken, (req, res, next) => {
-  res.send('Hello there');
-});
 
 router.post('/signup', (req, res, next) => {
   const { name, email, password, pic } = req.body;
@@ -38,15 +30,6 @@ router.post('/signup', (req, res, next) => {
             pic: pic,
           })
             .then((user) => {
-              //sendgrid
-              const msg = {
-                to: user.email,
-                from: 'chatwowapp@gmail.com',
-                subject: 'Welcome to chatwow',
-                text: 'We are happy to have you onboard with us!',
-                html: '<strong>Engage and Explore with us!</strong>',
-              };
-              sgMail.send(msg);
               res.json({ message: 'Successfully signed up' });
             })
             .catch((error) => {
