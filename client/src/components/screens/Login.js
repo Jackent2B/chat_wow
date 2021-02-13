@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../App';
 import M from 'materialize-css';
@@ -7,8 +7,8 @@ const Login = () => {
   const { state, dispatch } = useContext(UserContext);
 
   const history = useHistory();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const signinData = () => {
     fetch('/signin', {
       method: 'post',
@@ -31,6 +31,7 @@ const Login = () => {
         } else {
           //to store token locally so that we can create post after signin
           localStorage.setItem('jwt', data.token);
+          //we need to stringify this because in local storage we can only store strings
           localStorage.setItem('user', JSON.stringify(data.user));
 
           dispatch({ type: 'USER', payload: data.user });

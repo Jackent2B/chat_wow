@@ -28,7 +28,7 @@ router.post('/createpost', verifyToken, (req, res) => {
 
 router.get('/allpost', verifyToken, (req, res) => {
   Post.find({})
-    .populate('postedBy', '_id name')
+    .populate('postedBy', '_id name pic')
     .populate('comments.postedBy', '_id name')
     .then((result) => {
       res.json({
@@ -42,7 +42,7 @@ router.get('/allpost', verifyToken, (req, res) => {
 });
 
 router.get('/getsubpost', verifyToken, (req, res) => {
-  // if postedBy in following
+  //checking: if postedBy is in following
   Post.find({ postedBy: { $in: req.user.following } })
     .populate('postedBy', '_id name')
     .populate('comments.postedBy', '_id name')

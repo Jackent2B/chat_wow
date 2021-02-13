@@ -41,7 +41,7 @@ const Home = () => {
             return item;
           }
         });
-        setData(newData);
+        setData(...data, newData);
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +71,7 @@ const Home = () => {
             return item;
           }
         });
-        setData(newData);
+        setData(...data, newData);
       })
       .catch((err) => {
         console.log(err);
@@ -132,34 +132,43 @@ const Home = () => {
       {data.map((item) => {
         return (
           <div className='card home-card' key={item._id}>
-            <h5 style={{ padding: '15px', fontFamily: 'Permanent Marker' }}>
-              <Link
-                style={{ color: 'black' }}
-                to={
-                  item.postedBy._id !== state._id
-                    ? '/profile/' + item.postedBy._id
-                    : '/profile'
-                }
-              >
-                {item.postedBy.name.toUpperCase()}
-              </Link>{' '}
-              {item.postedBy._id === state._id && (
-                <i
-                  className='material-icons'
-                  style={{
-                    float: 'right',
-                  }}
-                  onClick={() => deletePost(item._id)}
+            <ul class='collection'>
+              <li class='collection-item avatar'>
+                <Link
+                  style={{ color: 'black' }}
+                  to={
+                    item.postedBy._id !== state._id
+                      ? '/profile/' + item.postedBy._id
+                      : '/profile'
+                  }
                 >
-                  delete
-                </i>
-              )}
-            </h5>
-
+                  <img src={item.postedBy.pic} alt='' class='circle' />
+                  <span
+                    class='title'
+                    style={{ padding: '15px', fontFamily: 'Permanent Marker' }}
+                  >
+                    {item.postedBy.name.toUpperCase()}
+                  </span>
+                </Link>
+                {/* <p>First Line</p> */}
+                {item.postedBy._id === state._id && (
+                  <i
+                    className='material-icons'
+                    style={{
+                      float: 'right',
+                    }}
+                    onClick={() => deletePost(item._id)}
+                  >
+                    delete
+                  </i>
+                )}
+              </li>
+            </ul>
             <div className='card-image'>
               <img src={item.photo} alt={'image here'} />
             </div>
             <div className='card-content'>
+              {/* state._id contains the user id */}
               {item.likes.includes(state._id) ? (
                 <i
                   className='material-icons'

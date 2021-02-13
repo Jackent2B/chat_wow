@@ -26,7 +26,7 @@ router.post('/signup', (req, res, next) => {
           User.create({
             name: name,
             password: hashedPassword,
-            email: email,
+            email: email.toLowerCase(),
             pic: pic,
           })
             .then((user) => {
@@ -49,7 +49,7 @@ router.post('/signin', (req, res, next) => {
   if (!email || !password)
     return res.status(422).json({ error: 'Correct fields required' });
 
-  User.findOne({ email: email })
+  User.findOne({ email: email.toLowerCase() })
     .then((savedUser) => {
       if (!savedUser) {
         return res.status(422).json({ error: 'user does not exist' });

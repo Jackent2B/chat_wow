@@ -18,6 +18,7 @@ const Routing = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
+    //JSON.parse() is used to convert string to object
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       dispatch({ type: 'USER', payload: user });

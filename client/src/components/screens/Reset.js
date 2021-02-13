@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
 const Reset = () => {
   const history = useHistory();
-  const [email, setEmail] = React.useState('');
+  const [email, setEmail] = useState('');
   const signinData = () => {
     fetch('/reset-password', {
       method: 'post',

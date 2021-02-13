@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
 const CreatePost = () => {
   const history = useHistory();
-  const [title, setTitle] = React.useState('');
-  const [body, setBody] = React.useState('');
-  const [image, setImage] = React.useState('');
-  const [url, setUrl] = React.useState('');
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
     if (url) {

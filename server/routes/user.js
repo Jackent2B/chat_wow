@@ -40,6 +40,18 @@ router.put('/updatepic', verifyToken, (req, res) => {
   );
 });
 
+router.post('/search-user', (req, res) => {
+  //'^' it will return all the records which starts with req.body.query
+  let userSearch = new RegExp('^' + req.body.query);
+  //here we are searching the email that starts with userSearch
+  User.find({ email: { $regex: userSearch } })
+    .select('_id email')
+    .then((user) => {
+      res.json({ user });
+    })
+    .catch((err) => console.log(err));
+});
+
 router.put('/follow', verifyToken, (req, res) => {
   User.findByIdAndUpdate(
     req.body.followId,
