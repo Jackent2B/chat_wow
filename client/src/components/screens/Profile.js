@@ -94,9 +94,15 @@ const Profile = () => {
                 width: '108%',
               }}
             >
-              <h6>{mypics.length} posts</h6>
-              <h6>{state ? state.followers.length : 0} Followers</h6>
-              <h6>{state ? state.following.length : 0} Following</h6>
+              <h6>
+                <b>{mypics.length}</b> posts
+              </h6>
+              <h6>
+                <b>{state ? state.followers.length : 0}</b> Followers
+              </h6>
+              <h6>
+                <b>{state ? state.following.length : 0}</b> Following
+              </h6>
             </div>
           </div>
         </div>

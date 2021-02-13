@@ -30,6 +30,7 @@ router.get('/allpost', verifyToken, (req, res) => {
   Post.find({})
     .populate('postedBy', '_id name pic')
     .populate('comments.postedBy', '_id name')
+    .sort('-createdAt') //createdAt field will automatically be created using "timestamps:true" in posts model.
     .then((result) => {
       res.json({
         posts: result,
@@ -58,6 +59,7 @@ router.get('/getsubpost', verifyToken, (req, res) => {
 router.get('/mypost', verifyToken, (req, res) => {
   Post.find({ postedBy: req.user._id })
     .populate('postedBy', '_id name')
+    .sort('-createdAt')
     .then((result) => {
       res.json({
         posts: result,
@@ -65,7 +67,7 @@ router.get('/mypost', verifyToken, (req, res) => {
     })
     .catch((error) => {
       console.log(error);
-      res.json({ error: 'Error Occured while showing the post' });
+      res.json({ error: 'Error Occurred while showing the post' });
     });
 });
 

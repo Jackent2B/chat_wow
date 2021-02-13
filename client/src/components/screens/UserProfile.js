@@ -119,14 +119,21 @@ const Profile = () => {
               <h5>{userProfile.user.email}</h5>
               <div
                 style={{
+                  paddingLeft: '10px',
                   display: 'flex',
                   justifyContent: 'space-between',
-                  width: '90%',
+                  width: '108%',
                 }}
               >
-                <h6>{userProfile.posts.length} posts</h6>
-                <h6>{userProfile.user.followers.length} followers</h6>
-                <h6>{userProfile.user.following.length} following</h6>
+                <h6>
+                  <b>{userProfile.posts.length}</b> posts
+                </h6>
+                <h6>
+                  <b>{userProfile.user.followers.length}</b> followers
+                </h6>
+                <h6>
+                  <b>{userProfile.user.following.length}</b> following
+                </h6>
               </div>
               {showfollow ? (
                 <button

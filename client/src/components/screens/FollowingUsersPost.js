@@ -130,29 +130,40 @@ const FollowingUsersPost = () => {
       {data.map((item) => {
         return (
           <div className='card home-card' key={item._id}>
-            <h5 style={{ padding: '15px', fontFamily: 'Permanent Marker' }}>
-              <Link
-                style={{ color: 'black' }}
-                to={
-                  item.postedBy._id !== state._id
-                    ? '/profile/' + item.postedBy._id
-                    : '/profile'
-                }
-              >
-                {item.postedBy.name.toUpperCase()}
-              </Link>{' '}
-              {item.postedBy._id === state._id && (
-                <i
-                  className='material-icons'
-                  style={{
-                    float: 'right',
-                  }}
-                  onClick={() => deletePost(item._id)}
+            <ul className='collection'>
+              <li className='collection-item avatar'>
+                <Link
+                  style={{ color: 'black' }}
+                  to={
+                    item.postedBy._id !== state._id
+                      ? '/profile/' + item.postedBy._id
+                      : '/profile'
+                  }
                 >
-                  delete
-                </i>
-              )}
-            </h5>
+                  <img src={item.postedBy.pic} alt='' className='circle' />
+                  <span className='title' style={{ padding: '15px' }}>
+                    <b>{item.postedBy.name.toUpperCase()}</b>
+                  </span>
+                </Link>
+
+                {/* <p>First Line</p> */}
+                {item.postedBy._id === state._id && (
+                  <i
+                    className='material-icons'
+                    style={{
+                      float: 'right',
+                    }}
+                    onClick={() => deletePost(item._id)}
+                  >
+                    delete
+                  </i>
+                )}
+                <br />
+                <span style={{ padding: '15px' }}>
+                  {item.createdAt.split('T')[0]}
+                </span>
+              </li>
+            </ul>
 
             <div className='card-image'>
               <img src={item.photo} alt={'avatar'} />
