@@ -153,4 +153,23 @@ router.delete('/deletepost/:postId', verifyToken, (req, res) => {
     });
 });
 
+router.put('/deleteComment', verifyToken, (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    {
+      //pull the comment out of the comments array
+      $pull: {
+        comments: { _id: req.body.commentId },
+      },
+    },
+    {
+      //to get a updated record from mongodb
+      new: true,
+    }
+  ).exec((err, result) => {
+    if (err) return res.status(422).json({ error: err });
+    else return result;
+  });
+});
+
 module.exports = router;
