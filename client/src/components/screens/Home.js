@@ -16,7 +16,8 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setData(result.posts);
+        setData([...data, ...result.posts]);
+        console.log(data);
       });
   }, []);
 
@@ -41,7 +42,7 @@ const Home = () => {
             return item;
           }
         });
-        setData(...data, newData);
+        setData(newData);
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +72,7 @@ const Home = () => {
             return item;
           }
         });
-        setData(...data, newData);
+        setData(newData);
       })
       .catch((err) => {
         console.log(err);
@@ -125,6 +126,37 @@ const Home = () => {
         });
         setData(newData);
       });
+  };
+
+  //delete comment
+  const deleteComment = (id, commentId) => {
+    fetch('/deleteComment', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+      body: JSON.stringify({
+        postId: id,
+        commentId: commentId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        //   console.log(result)
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    window.location.reload();
   };
 
   return (
@@ -214,6 +246,17 @@ const Home = () => {
                       </span>
                     </Link>{' '}
                     {record.text}
+                    {record.postedBy._id === state._id && (
+                      <i
+                        className='material-icons'
+                        style={{
+                          float: 'right',
+                        }}
+                        onClick={() => deleteComment(item._id, record._id)}
+                      >
+                        delete
+                      </i>
+                    )}
                   </h6>
                 );
               })}
