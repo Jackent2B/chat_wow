@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
-const SignIn = () => {
+const SignUp = () => {
   const history = useHistory();
   const [name, setName] = useState('');
   const [password, setPasword] = useState('');
@@ -18,9 +18,9 @@ const SignIn = () => {
   const uploadPic = () => {
     const data = new FormData();
     data.append('file', image);
-    data.append('upload_preset', 'new-insta');
-    data.append('cloud_name', 'cnq');
-    fetch('https://api.cloudinary.com/v1_1/cnq/image/upload', {
+    data.append('upload_preset', 'chatWow');
+    data.append('cloud_name', 'jackent2b');
+    fetch('https://api.cloudinary.com/v1_1/jackent2b/image/upload', {
       method: 'post',
       body: data,
     })
@@ -113,7 +113,7 @@ const SignIn = () => {
           className='waves-effect waves-light btn'
           onClick={() => PostData()}
         >
-          SignUP
+          SignUp
         </button>
         <div style={{ paddingTop: '10px', fontFamily: 'Galada' }}>
           Already have an Account? <Link to='/signin'>Login</Link>
@@ -123,4 +123,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
