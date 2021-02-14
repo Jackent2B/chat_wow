@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const [userProfile, setProfile] = useState(null);
-  const [showfollow, setShowFollow] = useState(true);
+
   const { state, dispatch } = useContext(UserContext);
   const { userid } = useParams();
   useEffect(() => {
@@ -19,6 +19,7 @@ const Profile = () => {
 
         setProfile(result);
       });
+    console.log(state);
   }, []);
 
   const followUser = () => {
@@ -48,7 +49,6 @@ const Profile = () => {
             },
           };
         });
-        setShowFollow(false);
       });
   };
 
@@ -83,7 +83,6 @@ const Profile = () => {
             },
           };
         });
-        setShowFollow(true);
       });
   };
 
@@ -135,7 +134,7 @@ const Profile = () => {
                   <b>{userProfile.user.following.length}</b> following
                 </h6>
               </div>
-              {showfollow ? (
+              {!state.following.includes(userid) ? (
                 <button
                   style={{
                     margin: '10px',

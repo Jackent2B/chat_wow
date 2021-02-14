@@ -2,8 +2,8 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App';
 import M from 'materialize-css';
-import Tippy from '@tippy.js/react';
-import 'tippy.js/dist/tippy.css';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'; // optional
 
 const Navbar = () => {
   const [search, setSearch] = useState('');
