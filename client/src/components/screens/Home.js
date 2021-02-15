@@ -161,119 +161,125 @@ const Home = () => {
 
   return (
     <div className='home'>
-      {data.map((item) => {
-        return (
-          <div className='card home-card' key={item._id}>
-            <ul className='collection'>
-              <li className='collection-item avatar'>
-                <Link
-                  style={{ color: 'black' }}
-                  to={
-                    item.postedBy._id !== state._id
-                      ? '/profile/' + item.postedBy._id
-                      : '/profile'
-                  }
-                >
-                  <img src={item.postedBy.pic} alt='' className='circle' />
-                  <span className='title' style={{ padding: '15px' }}>
-                    <b>{item.postedBy.name.toUpperCase()}</b>
-                  </span>
-                </Link>
+      {data.length ? (
+        data.map((item) => {
+          return (
+            <div className='card home-card' key={item._id}>
+              <ul className='collection'>
+                <li className='collection-item avatar'>
+                  <Link
+                    style={{ color: 'black' }}
+                    to={
+                      item.postedBy._id !== state._id
+                        ? '/profile/' + item.postedBy._id
+                        : '/profile'
+                    }
+                  >
+                    <img src={item.postedBy.pic} alt='' className='circle' />
+                    <span className='title' style={{ padding: '15px' }}>
+                      <b>{item.postedBy.name.toUpperCase()}</b>
+                    </span>
+                  </Link>
 
-                {/* <p>First Line</p> */}
-                {item.postedBy._id === state._id && (
+                  {/* <p>First Line</p> */}
+                  {item.postedBy._id === state._id && (
+                    <i
+                      className='material-icons'
+                      style={{
+                        float: 'right',
+                      }}
+                      onClick={() => deletePost(item._id)}
+                    >
+                      delete
+                    </i>
+                  )}
+                  <br />
+                  <span style={{ padding: '15px' }}>
+                    {item.createdAt.split('T')[0]}
+                  </span>
+                </li>
+              </ul>
+              <div className='card-image'>
+                <img src={item.photo} alt={'image here'} />
+              </div>
+              <div className='card-content'>
+                {/* state._id contains the user id */}
+                {item.likes.includes(state._id) ? (
                   <i
                     className='material-icons'
-                    style={{
-                      float: 'right',
+                    onClick={() => {
+                      unlikePost(item._id);
                     }}
-                    onClick={() => deletePost(item._id)}
+                    style={{ color: 'red' }}
                   >
-                    delete
+                    favorite
+                  </i>
+                ) : (
+                  <i
+                    className='material-icons'
+                    onClick={() => {
+                      likePost(item._id);
+                    }}
+                    style={{ color: '#bfbfbf' }}
+                  >
+                    favorite
                   </i>
                 )}
-                <br />
-                <span style={{ padding: '15px' }}>
-                  {item.createdAt.split('T')[0]}
-                </span>
-              </li>
-            </ul>
-            <div className='card-image'>
-              <img src={item.photo} alt={'image here'} />
-            </div>
-            <div className='card-content'>
-              {/* state._id contains the user id */}
-              {item.likes.includes(state._id) ? (
-                <i
-                  className='material-icons'
-                  onClick={() => {
-                    unlikePost(item._id);
-                  }}
-                  style={{ color: 'red' }}
-                >
-                  favorite
-                </i>
-              ) : (
-                <i
-                  className='material-icons'
-                  onClick={() => {
-                    likePost(item._id);
-                  }}
-                  style={{ color: '#bfbfbf' }}
-                >
-                  favorite
-                </i>
-              )}
-              <h6>{item.likes.length} likes</h6>
-              <h5>
-                <b>{item.title}</b>
-              </h5>
-              <p>{item.body}</p>
+                <h6>{item.likes.length} likes</h6>
+                <h5>
+                  <b>{item.title}</b>
+                </h5>
+                <p>{item.body}</p>
 
-              {item.comments.map((record) => {
-                return (
-                  <h6 key={record._id}>
-                    <Link
-                      style={{ color: 'black' }}
-                      to={
-                        record.postedBy._id !== state._id
-                          ? '/profile/' + record.postedBy._id
-                          : '/profile'
-                      }
-                    >
-                      <span style={{ fontWeight: '500' }}>
-                        {record.postedBy.name}
-                      </span>
-                    </Link>{' '}
-                    {record.text}
-                    {record.postedBy._id === state._id && (
-                      <i
-                        className='material-icons'
-                        style={{
-                          float: 'right',
-                        }}
-                        onClick={() => deleteComment(item._id, record._id)}
+                {item.comments.map((record) => {
+                  return (
+                    <h6 key={record._id}>
+                      <Link
+                        style={{ color: 'black' }}
+                        to={
+                          record.postedBy._id !== state._id
+                            ? '/profile/' + record.postedBy._id
+                            : '/profile'
+                        }
                       >
-                        delete
-                      </i>
-                    )}
-                  </h6>
-                );
-              })}
+                        <span style={{ fontWeight: '500' }}>
+                          {record.postedBy.name}
+                        </span>
+                      </Link>{' '}
+                      {record.text}
+                      {record.postedBy._id === state._id && (
+                        <i
+                          className='material-icons'
+                          style={{
+                            float: 'right',
+                          }}
+                          onClick={() => deleteComment(item._id, record._id)}
+                        >
+                          delete
+                        </i>
+                      )}
+                    </h6>
+                  );
+                })}
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  makeComment(e.target[0].value, item._id);
-                  e.target[0].value = ' ';
-                }}
-              >
-                <input type='text' placeholder='add a comment' />
-              </form>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    makeComment(e.target[0].value, item._id);
+                    e.target[0].value = ' ';
+                  }}
+                >
+                  <input type='text' placeholder='add a comment' />
+                </form>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      ) : (
+        <h2 style={{ textAlign: 'center', fontFamily: 'Galada' }}>
+          Loading...
+        </h2>
+      )}
     </div>
   );
 };

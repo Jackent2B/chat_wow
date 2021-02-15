@@ -125,99 +125,146 @@ const FollowingUsersPost = () => {
       });
   };
 
+  //delete comment
+  const deleteComment = (id, commentId) => {
+    fetch('/deleteComment', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+      },
+      body: JSON.stringify({
+        postId: id,
+        commentId: commentId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        //   console.log(result)
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    window.location.reload();
+  };
+
   return (
     <div className='home'>
-      {data.map((item) => {
-        return (
-          <div className='card home-card' key={item._id}>
-            <ul className='collection'>
-              <li className='collection-item avatar'>
-                <Link
-                  style={{ color: 'black' }}
-                  to={
-                    item.postedBy._id !== state._id
-                      ? '/profile/' + item.postedBy._id
-                      : '/profile'
-                  }
-                >
-                  <img src={item.postedBy.pic} alt='' className='circle' />
-                  <span className='title' style={{ padding: '15px' }}>
-                    <b>{item.postedBy.name.toUpperCase()}</b>
-                  </span>
-                </Link>
+      {data.length ? (
+        data.map((item) => {
+          return (
+            <div className='card home-card' key={item._id}>
+              <ul className='collection'>
+                <li className='collection-item avatar'>
+                  <Link
+                    style={{ color: 'black' }}
+                    to={
+                      item.postedBy._id !== state._id
+                        ? '/profile/' + item.postedBy._id
+                        : '/profile'
+                    }
+                  >
+                    <img src={item.postedBy.pic} alt='' className='circle' />
+                    <span className='title' style={{ padding: '15px' }}>
+                      <b>{item.postedBy.name.toUpperCase()}</b>
+                    </span>
+                  </Link>
 
-                {/* <p>First Line</p> */}
-                {item.postedBy._id === state._id && (
+                  {/* <p>First Line</p> */}
+                  {item.postedBy._id === state._id && (
+                    <i
+                      className='material-icons'
+                      style={{
+                        float: 'right',
+                      }}
+                      onClick={() => deletePost(item._id)}
+                    >
+                      delete
+                    </i>
+                  )}
+                  <br />
+                  <span style={{ padding: '15px' }}>
+                    {item.createdAt.split('T')[0]}
+                  </span>
+                </li>
+              </ul>
+
+              <div className='card-image'>
+                <img src={item.photo} alt={'avatar'} />
+              </div>
+              <div className='card-content'>
+                {item.likes.includes(state._id) ? (
                   <i
                     className='material-icons'
-                    style={{
-                      float: 'right',
+                    onClick={() => {
+                      unlikePost(item._id);
                     }}
-                    onClick={() => deletePost(item._id)}
+                    style={{ color: 'red' }}
                   >
-                    delete
+                    favorite
+                  </i>
+                ) : (
+                  <i
+                    className='material-icons'
+                    onClick={() => {
+                      likePost(item._id);
+                    }}
+                    style={{ color: '#bfbfbf' }}
+                  >
+                    favorite
                   </i>
                 )}
-                <br />
-                <span style={{ padding: '15px' }}>
-                  {item.createdAt.split('T')[0]}
-                </span>
-              </li>
-            </ul>
+                <h6>{item.likes.length} likes</h6>
+                <h6>{item.title}</h6>
+                <p>{item.body}</p>
 
-            <div className='card-image'>
-              <img src={item.photo} alt={'avatar'} />
-            </div>
-            <div className='card-content'>
-              <i className='material-icons' style={{ color: 'red' }}>
-                favorite
-              </i>
-              {item.likes.includes(state._id) ? (
-                <i
-                  className='material-icons'
-                  onClick={() => {
-                    unlikePost(item._id);
+                {item.comments.map((record) => {
+                  return (
+                    <h6 key={record._id}>
+                      <span style={{ fontWeight: '500' }}>
+                        {record.postedBy.name}
+                      </span>{' '}
+                      {record.text}
+                      {record.postedBy._id === state._id && (
+                        <i
+                          className='material-icons'
+                          style={{
+                            float: 'right',
+                          }}
+                          onClick={() => deleteComment(item._id, record._id)}
+                        >
+                          delete
+                        </i>
+                      )}
+                    </h6>
+                  );
+                })}
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    makeComment(e.target[0].value, item._id);
                   }}
                 >
-                  thumb_down
-                </i>
-              ) : (
-                <i
-                  className='material-icons'
-                  onClick={() => {
-                    likePost(item._id);
-                  }}
-                >
-                  thumb_up
-                </i>
-              )}
-              <h6>{item.likes.length} likes</h6>
-              <h6>{item.title}</h6>
-              <p>{item.body}</p>
-
-              {item.comments.map((record) => {
-                return (
-                  <h6 key={record._id}>
-                    <span style={{ fontWeight: '500' }}>
-                      {record.postedBy.name}
-                    </span>{' '}
-                    {record.text}
-                  </h6>
-                );
-              })}
-
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  makeComment(e.target[0].value, item._id);
-                }}
-              >
-                <input type='text' placeholder='add a comment' />
-              </form>
+                  <input type='text' placeholder='add a comment' />
+                </form>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      ) : (
+        <h2 style={{ textAlign: 'center', fontFamily: 'Galada' }}>
+          No posts to Show
+        </h2>
+      )}
     </div>
   );
 };

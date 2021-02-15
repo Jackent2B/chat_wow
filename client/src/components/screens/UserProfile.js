@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const [userProfile, setProfile] = useState(null);
-
   const { state, dispatch } = useContext(UserContext);
   const { userid } = useParams();
   useEffect(() => {
@@ -134,7 +133,7 @@ const Profile = () => {
                   <b>{userProfile.user.following.length}</b> following
                 </h6>
               </div>
-              {!state.following.includes(userid) ? (
+              {state && !state.following.includes(userid) ? (
                 <button
                   style={{
                     margin: '10px',
