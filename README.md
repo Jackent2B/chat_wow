@@ -51,6 +51,8 @@ ChatWow Profile page
 
 
 
+ChatWow Profile page
+![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_other_userProfile.png?raw=true)
 
 
 
