@@ -51,13 +51,6 @@ ChatWow create post page-1
 
 
 
-ChatWow create post page-2
-![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_create_post2.png?raw=true)
-
-
-
-
-
 
 ChatWow Home page-1
 ![](https://github.com/Jackent2B/chat_wow/blob/main/chatwow_home1.png?raw=true)
